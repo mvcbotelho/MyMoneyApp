@@ -21,6 +21,7 @@ BillingCycle.route('summary', (req, res, next) => {
     }, {
     $project: { _id: 0, credit: 1, debt: 1 }
     }, (error, result) => {
+      console.log('RESULT - ', result)
       if (error) {
         res.status(500).json({ errors: [error] })
       } else {
