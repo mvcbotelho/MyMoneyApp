@@ -15,10 +15,10 @@ class BillingCycle extends Component {
         <Content>
           <Tabs>
             <TabsHeader>
-              <TabHeader taget='tabList' icon='bars' label='Listas' />
-              <TabHeader taget='tabCreate' icon='plus' label='Incluir' />
-              <TabHeader taget='tabUpdate' icon='pensil' label='Alterar' />
-              <TabHeader taget='tabDelete' icon='trash-o' label='Excluir' />
+              <TabHeader target='tabList' icon='bars' label='Listas' />
+              <TabHeader target='tabCreate' icon='plus' label='Incluir' />
+              <TabHeader target='tabUpdate' icon='pensil' label='Alterar' />
+              <TabHeader target='tabDelete' icon='trash-o' label='Excluir' />
             </TabsHeader>
             <TabsContent>
             </TabsContent>
