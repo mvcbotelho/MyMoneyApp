@@ -16,12 +16,13 @@ class BillingCycleList extends Component {
       <tr key={bc._id}>
         <td>{bc.name}</td>
         <td>{bc.month}</td>
-        <td>{bc.years}</td>
+        <td>{bc.year}</td>
       </tr>
     ))
   }
   
   render () {
+    console.log(this.renderRows())
     return (
       <div>
         <table className='table'>

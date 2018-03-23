@@ -18,3 +18,14 @@ export function create (value) {
     type: 'TEMP'
   }
 }
+
+export function update (value, id) {
+ const update = axios.put(`${BASE_URL}/billingCycles/:id`, value, id)
+ return {
+   type: 'TEMP'
+ }
+}
+
+export function exclude (value, id) {
+  const exclude = axios.delete(`${BASE_URL}/billingCycles/:id`, value, id)
+}
