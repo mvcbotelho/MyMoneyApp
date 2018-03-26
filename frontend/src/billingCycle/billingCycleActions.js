@@ -1,36 +1,55 @@
 import axios from 'axios'
 import { toastr } from 'react-redux-toastr'
+import { reset as resetForm, initialize } from 'redux-form'
+import { showTabs, selectTab } from '../common/tab/tabActions'
 
 const BASE_URL = 'http://localhost:3003/api'
+const INITAL_VALUES = {}
 
-export function getList () {
+export function getList() {
   const request = axios.get(`${BASE_URL}/billingCycles`)
   return {
     type: 'BILLING_CYCLES_FETCHED',
     payload: request
-  } 
-}
-
-export function create (value) {
-  axios.post(`${BASE_URL}/billingCycles`, value)
-  .then(resp => {
-    toastr.success('Sucesso', 'Operação realizada com sucesso!')
-  })
-  .catch(e => {
-    e.response.data.errors.forEach(error => toastr.error('Erro', error))
-  })
-  return {
-    type: 'TEMP'
   }
 }
 
-export function update (value, id) {
- const update = axios.put(`${BASE_URL}/billingCycles/:id`, value, id)
- return {
-   type: 'TEMP'
- }
+export function create(value) {
+  return submit(value, 'post')
 }
 
-export function exclude (value, id) {
-  const exclude = axios.delete(`${BASE_URL}/billingCycles/:id`, value, id)
+export function update(value){
+  return submit(value, 'put')
+}
+
+function submit(value, method) {
+  return dispatch => {
+    const id = value._id ? value._id : ''
+    axios[method](`${BASE_URL}/billingCycles/${id}`, value)
+      .then(resp => {
+        toastr.success('Sucesso', 'Operação realizada com sucesso!')
+        dispatch(init())
+      })
+      .catch(e => {
+        e.response.data.errors.forEach(error => toastr.error('Erro', error))
+      })
+  }
+}
+
+export function showUpdate(billingCycle) {
+  return [
+    showTabs('tabUpdate'),
+    selectTab('tabUpdate'),
+    initialize('billingCycleForm', billingCycle)
+  ]
+}
+
+export function init (){
+  return [
+    showTabs('tabList', 'tabCreate'),
+    selectTab('tabList'),
+    getList(),
+    initialize('billingCycleForm', INITAL_VALUES)
+
+  ]
 }
