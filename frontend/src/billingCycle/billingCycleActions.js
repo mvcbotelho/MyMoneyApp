@@ -21,6 +21,9 @@ export function create(value) {
 export function update(value){
   return submit(value, 'put')
 }
+export function remove(value){
+  return submit(value, 'delete')
+}
 
 function submit(value, method) {
   return dispatch => {
@@ -40,6 +43,14 @@ export function showUpdate(billingCycle) {
   return [
     showTabs('tabUpdate'),
     selectTab('tabUpdate'),
+    initialize('billingCycleForm', billingCycle)
+  ]
+}
+
+export function showDelete(billingCycle) {
+  return [
+    showTabs('tabDelete'),
+    selectTab('tabDelete'),
     initialize('billingCycleForm', billingCycle)
   ]
 }
